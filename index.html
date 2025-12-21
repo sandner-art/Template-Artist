@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Name | Contemporary Artist & Designer</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Portfolio of [Artist Name] - Contemporary artist and designer specializing in [medium/style]. View exhibitions, artworks, and latest news.">
+    <meta name="keywords" content="artist, designer, photographer, contemporary art, portfolio">
+    <meta name="author" content="Artist Name">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yoursite.com/">
+    <meta property="og:title" content="Artist Name | Contemporary Artist & Designer">
+    <meta property="og:description" content="Portfolio of [Artist Name] - Contemporary artist and designer">
+    <meta property="og:image" content="https://yoursite.com/og-image.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://yoursite.com/">
+    <meta name="twitter:title" content="Artist Name | Contemporary Artist & Designer">
+    <meta name="twitter:description" content="Portfolio of [Artist Name]">
+    <meta name="twitter:image" content="https://yoursite.com/og-image.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Artist Name",
+      "jobTitle": "Artist & Designer",
+      "url": "https://yoursite.com",
+      "sameAs": [
+        "https://instagram.com/artistname",
+        "https://twitter.com/artistname",
+        "https://linkedin.com/in/artistname"
+      ],
+      "image": "https://yoursite.com/profile.jpg",
+      "description": "Contemporary artist and designer"
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #fafafa;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --border: #e5e5e5;
+            --accent: #1a1a1a;
+        }
+        
+        [data-theme="dark"] {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #f5f5f5;
+            --text-secondary: #999999;
+            --border: #2a2a2a;
+            --accent: #f5f5f5;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+            transition: transform 0.3s;
+        }
+        
+        [data-theme="dark"] nav {
+            background: rgba(10, 10, 10, 0.9);
+        }
+        
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: opacity 0.2s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.6;
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        
+        .theme-toggle:hover {
+            background: var(--bg-secondary);
+        }
+        
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Slideshow */
+        .hero {
+            margin-top: 60px;
+            height: 90vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-slideshow {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .hero-slide.active {
+            opacity: 1;
+        }
+        
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            text-align: center;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 300;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            font-weight: 300;
+        }
+        
+        .hero-nav {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 3;
+        }
+        
+        .hero-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .hero-dot.active {
+            background: white;
+            width: 30px;
+            border-radius: 5px;
+        }
+        
+        .hero-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 3;
+            transition: background 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        
+        .hero-arrow:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        .hero-arrow.prev {
+            left: 1rem;
+        }
+        
+        .hero-arrow.next {
+            right: 1rem;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            letter-spacing: -1px;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        /* Gallery Grid Options */
+        .gallery-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .grid-toggle {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            background: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 4px;
+        }
+        
+        .grid-toggle.active {
+            background: var(--accent);
+            color: var(--bg-primary);
+            border-color: var(--accent);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            gap: 2rem;
+            transition: all 0.3s;
+        }
+        
+        .gallery-grid.grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .gallery-grid.grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 4/5;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-item-info {
+            transform: translateY(0);
+        }
+        
+        .gallery-item-info h3 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+        
+        .gallery-item-info p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Video Embed Section */
+        .media-embed {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-caption {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Social Media Embeds */
+        .social-embed {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-secondary);
+        }
+        
+        .social-embed-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .social-platform-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 1.2rem;
+        }
+        
+        .instagram-icon {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+        }
+        
+        .twitter-icon {
+            background: #1DA1F2;
+            color: white;
+        }
+        
+        .social-embed-content img {
+            width: 100%;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        
+        .social-embed-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .social-embed-link {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .social-embed-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        
+        .about-image {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        .about-text h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+        
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .about-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .about-details h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .about-details ul {
+            list-style: none;
+        }
+        
+        .about-details li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Exhibitions & News */
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline-item {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+        
+        .timeline-date {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-item h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-item p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        .timeline-location {
+            font-style: italic;
+            margin-top: 0.5rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Contact & Social */
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+        
+        .social-links a:hover {
+            background: var(--bg-secondary);
+            transform: translateY(-2px);
+        }
+        
+        .contact-email {
+            display: inline-block;
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--text-primary);
+            transition: opacity 0.2s;
+        }
+        
+        .contact-email:hover {
+            opacity: 0.6;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Share Button */
+        .share-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: var(--bg-primary);
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+            z-index: 999;
+        }
+        
+        .share-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-primary);
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .gallery-grid.grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .gallery-grid {
+                gap: 1rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .about-details {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 3rem 1rem;
+            }
+            
+            .share-btn {
+                bottom: 1rem;
+                right: 1rem;
+            }
+            
+            .social-embed {
+                padding: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-grid.grid-2,
+            .gallery-grid.grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">ARTIST NAME</div>
+        <div class="nav-links" id="navLinks">
+            <a href="#work">Work</a>
+            <a href="#media">Media</a>
+            <a href="#about">About</a>
+            <a href="#exhibitions">Exhibitions</a>
+            <a href="#news">News</a>
+            <a href="#contact">Contact</a>
+            <button class="theme-toggle" onclick="toggleTheme()">◐</button>
+        </div>
+        <button class="mobile-menu" onclick="toggleMenu()">☰</button>
+    </nav>
+
+    <!-- Hero Slideshow -->
+    <section class="hero" id="home">
+        <div class="hero-slideshow">
+            <div class="hero-slide active">
+                <img src="assets\images\gallery-17.jpg" alt="Sculpture Art 1">
+            </div>
+            <div class="hero-slide">
+                <img src="assets\images\gallery-12.jpg" alt="Sculpture Art 2">
+            </div>
+            <div class="hero-slide">
+                <img src="assets\images\gallery-11.jpg" alt="Abstract Art">
+            </div>
+            <div class="hero-slide">
+                <img src="assets\images\gallery-6.jpg" alt="Contemporary Art">
+            </div>
+        </div>
+        
+        <button class="hero-arrow prev" onclick="changeSlide(-1)">‹</button>
+        <button class="hero-arrow next" onclick="changeSlide(1)">›</button>
+        
+        <div class="hero-content">
+            <h1>ARTIST NAME</h1>
+            <p>Contemporary Artist & Designer</p>
+        </div>
+        
+        <div class="hero-nav" id="heroNav"></div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="work">
+        <h2>Selected Works</h2>
+        
+        <div class="gallery-controls">
+            <button class="grid-toggle active" onclick="setGridLayout(2)">2 Columns</button>
+            <button class="grid-toggle" onclick="setGridLayout(3)">3 Columns</button>
+        </div>
+        
+        <div class="gallery-grid grid-2" id="galleryGrid">
+            <div class="gallery-item">
+                <img src="assets\images\gallery-1.jpg" alt="Sculpture 1">
+                <div class="gallery-item-info">
+                    <h3>Form & Space I</h3>
+                    <p>Bronze Sculpture, 2025</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets\images\gallery-2.jpg" alt="Sculpture 2">
+                <div class="gallery-item-info">
+                    <h3>Equilibrium</h3>
+                    <p>Steel & Marble, 2025</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets\images\gallery-3.jpg" alt="Abstract Art">
+                <div class="gallery-item-info">
+                    <h3>Untitled I</h3>
+                    <p>Mixed Media on Canvas, 2025</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets\images\gallery-4.jpg" alt="Art 2">
+                <div class="gallery-item-info">
+                    <h3>Reflections</h3>
+                    <p>Oil on Canvas, 2025</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets\images\gallery-5.jpg" alt="Art 3">
+                <div class="gallery-item-info">
+                    <h3>Urban Dreams</h3>
+                    <p>Photography Series, 2024</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets\images\gallery-6.jpg" alt="Art 4">
+                <div class="gallery-item-info">
+                    <h3>Light Studies</h3>
+                    <p>Digital Collage, 2024</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets\images\gallery-10.jpg" alt="Sculpture 3">
+                <div class="gallery-item-info">
+                    <h3>Ascension</h3>
+                    <p>Wood & Metal, 2024</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets\images\gallery-8.jpg" alt="Art 5">
+                <div class="gallery-item-info">
+                    <h3>Untitled II</h3>
+                    <p>Acrylic on Canvas, 2024</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="assets\images\gallery-9.jpg" alt="Sculpture 4">
+                <div class="gallery-item-info">
+                    <h3>Convergence</h3>
+                    <p>Stone Sculpture, 2024</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Embeds Section -->
+    <section id="media">
+        <h2>Media & Process</h2>
+        
+        <div class="media-embed">
+            <!-- YouTube Video Embed -->
+            <div class="video-container">
+                <iframe 
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                    title="Studio Visit - Artist Process" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p class="video-caption">Studio Visit: Behind the Scenes of "Form & Space" Series</p>
+        </div>
+        
+        <!-- Instagram Embed Style -->
+        <div class="social-embed">
+            <div class="social-embed-header">
+                <div class="social-platform-icon instagram-icon">📷</div>
+                <div>
+                    <strong>@artistname</strong>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary);">Instagram</div>
+                </div>
+            </div>
+            <div class="social-embed-content">
+                <img src="assets\images\gallery-17.jpg" alt="Instagram Post">
+                <p class="social-embed-text">
+                    Excited to share this new piece from the studio! Working with bronze and exploring negative space. What do you think? ✨
+                </p>
+                <a href="https://instagram.com/p/example" class="social-embed-link" target="_blank">View on Instagram →</a>
+            </div>
+        </div>
+        
+        <!-- Twitter/X Embed Style -->
+        <div class="social-embed">
+            <div class="social-embed-header">
+                <div class="social-platform-icon twitter-icon">𝕏</div>
+                <div>
+                    <strong>@artistname</strong>
+                    <div style="font-size: 0.85rem; color: var(--text-secondary);">Twitter/X</div>
+                </div>
+            </div>
+            <div class="social-embed-content">
+                <p class="social-embed-text">
+                    Thrilled to announce my upcoming solo exhibition at Modern Art Gallery opening March 15th! Preview night March 14th. Save the date 🎨
+                </p>
+                <a href="https://twitter.com/artistname/status/example" class="social-embed-link" target="_blank">View on Twitter →</a>
+            </div>
+        </div>
+        
+        <!-- Another Video -->
+        <div class="media-embed">
+            <div class="video-container">
+                <iframe 
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                    title="Exhibition Walkthrough" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p class="video-caption">Exhibition Walkthrough: "Transitions" at Modern Art Space, 2024</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About</h2>
+        <div class="about-content">
+            <img src="assets/images/artist3.jpg" alt="Artist Portrait" class="about-image">
+            <div class="about-text">
+                <h3>Artist Bio</h3>
+                <p>Born in [City, Year], [Artist Name] is a contemporary artist and designer whose work explores the intersection of form, space, and material. Through sculpture, painting, and mixed media, they create pieces that challenge conventional perspectives and invite viewers to reconsider their relationship with the physical world.</p>
+                
+                <p>Their practice is characterized by a minimalist approach and careful attention to materiality, drawing inspiration from natural forms and architectural structures. Recent work has focused on the interplay between positive and negative space, resulting in a body of work that is both contemplative and dynamic.</p>
+                
+                <div class="about-details">
+                    <div>
+                        <h4>Education</h4>
+                        <ul>
+                            <li>MFA, Yale School of Art, 2020</li>
+                            <li>BFA, Rhode Island School of Design, 2018</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Collections</h4>
+                        <ul>
+                            <li>Museum of Modern Art, NY</li>
+                            <li>Tate Modern, London</li>
+                            <li>Various Private Collections</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Awards</h4>
+                        <ul>
+                            <li>Emerging Artist Award, 2024</li>
+                            <li>Contemporary Art Prize, 2023</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Residencies</h4>
+                        <ul>
+                            <li>MacDowell Colony, 2024</li>
+                            <li>Yaddo Artist Residency, 2023</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exhibitions Section -->
+    <section id="exhibitions">
+        <h2>Exhibitions</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">UPCOMING</div>
+                <h3>New Perspectives</h3>
+                <p>Solo exhibition featuring recent works exploring the relationship between form and negative space. The exhibition presents twelve new pieces created specifically for this show, including large-scale sculptures and intimate studies.</p>
+                <div class="timeline-location">Modern Art Gallery, New York • March 15 - May 30, 2025</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2024</div>
+                <h3>Collective Visions</h3>
+                <p>Group exhibition featuring emerging artists working in contemporary sculpture and installation. Showcased alongside internationally recognized artists exploring materiality and space.</p>
+                <div class="timeline-location">Contemporary Art Museum, Los Angeles • November 2024</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2024</div>
+                <h3>Solo: Transitions</h3>
+                <p>First major solo exhibition presenting a comprehensive look at work from 2022-2024, including the complete "Form & Space" series and experimental pieces in bronze and steel.</p>
+                <div class="timeline-location">Modern Art Space, London • June 2024</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2023</div>
+                <h3>Emerging Artists Biennial</h3>
+                <p>Selected for the prestigious biennial featuring work by promising artists from around the world. Featured three large-scale sculptures exploring themes of balance and equilibrium.</p>
+                <div class="timeline-location">International Gallery, Berlin • September 2023</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news">
+        <h2>Latest News</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">December 2025</div>
+                <h3>Featured in Art Magazine</h3>
+                <p>In-depth profile published in Contemporary Art Review discussing recent work and upcoming projects. The article explores the evolution of the "Form & Space" series and includes exclusive studio visit photography.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">November 2025</div>
+                <h3>New Studio Announcement</h3>
+                <p>Excited to announce the opening of a new studio space in Brooklyn, NY. This expanded workspace will enable larger-scale projects and provide opportunities for collaboration with other artists and designers.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">October 2025</div>
+                <h3>Award Recognition</h3>
+                <p>Honored to receive the Emerging Artist Award from the Contemporary Art Foundation for excellence in sculpture and installation art. This recognition supports continued exploration of materiality and form.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Get in Touch</h2>
+        <div class="contact-content">
+            <p>For inquiries about available works, exhibitions, collaborations, or press requests, please reach out.</p>
+            
+            <a href="mailto:artist@email.com" class="contact-email">artist@email.com</a>
+            
+            <div class="social-links">
+                <a href="https://instagram.com/artistname" target="_blank">📷 Instagram</a>
+                <a href="https://twitter.com/artistname" target="_blank">𝕏 Twitter</a>
+                <a href="https://linkedin.com/in/artistname" target="_blank">💼 LinkedIn</a>
+                <a href="https://youtube.com/@artistname" target="_blank">▶️ YouTube</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Artist Name. All rights reserved.</p>
+    </footer>
+
+    <!-- Share Button -->
+    <button class="share-btn" onclick="sharePortfolio()" title="Share">↗</button>
+
+    <script>
+        // Hero Slideshow
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const heroNav = document.getElementById('heroNav');
+        let slideInterval;
+
+        // Create navigation dots
+        slides.forEach((slide, index) => {
+            const dot = document.createElement('div');
+            dot.className = 'hero-dot';
+            if (index === 0) dot.classList.add('active');
+            dot.onclick = () => goToSlide(index);
+            heroNav.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.hero-dot');
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            currentSlide = (n + slides.length) % slides.length;
+            
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+            resetInterval();
+        }
+
+        function goToSlide(n) {
+            showSlide(n);
+            resetInterval();
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function startSlideshow() {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            startSlideshow();
+        }
+
+        // Start automatic slideshow
+        startSlideshow();
+
+        // Pause on hover
+        const heroSection = document.querySelector('.hero');
+        heroSection.addEventListener('mouseenter', () => clearInterval(slideInterval));
+        heroSection.addEventListener('mouseleave', startSlideshow);
+
+        // Gallery Grid Toggle
+        function setGridLayout(columns) {
+            const gallery = document.getElementById('galleryGrid');
+            const buttons = document.querySelectorAll('.grid-toggle');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            gallery.className = 'gallery-grid grid-' + columns;
+        }
+
+        // Theme Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+        
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+        
+        // Share Function
+        async function sharePortfolio() {
+            const shareData = {
+                title: 'Artist Name Portfolio',
+                text: 'Check out this amazing portfolio by Artist Name - Contemporary Artist & Designer',
+                url: window.location.href
+            };
+            
+            try {
+                if (navigator.share) {
+                    await navigator.share(shareData);
+                } else {
+                    await navigator.clipboard.writeText(window.location.href);
+                    alert('Link copied to clipboard!');
+                }
+            } catch (err) {
+                console.log('Error sharing:', err);
+            }
+        }
+        
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+        
+        // Navigation scroll effect
+        let lastScroll = 0;
+        const nav = document.querySelector('nav');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > lastScroll && currentScroll > 80) {
+                nav.style.transform = 'translateY(-100%)';
+            } else {
+                nav.style.transform = 'translateY(0)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>
