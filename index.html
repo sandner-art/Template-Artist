@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artist Name | Contemporary Artist & Designer</title>
-    
+
+    <!-- FAVICON LINK -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">    
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="Portfolio of [Artist Name] - Contemporary artist and designer specializing in [medium/style]. View exhibitions, artworks, and latest news.">
     <meta name="keywords" content="artist, designer, photographer, contemporary art, portfolio">
@@ -151,7 +154,7 @@
             height: 70vh; /* Options: 600px, 100vh (full screen), 50vh (half) */
             
             /* 2. CONTROL WIDTH HERE */
-            max-width: 1600px; /* Limits width on huge screens. Set to 100% for full width */
+            max-width: 100%; /* Limits width on huge screens - like 1600px. Set to 100% for full width */
             margin-left: auto; /* Centers the block if max-width is used */
             margin-right: auto;
             
@@ -726,6 +729,44 @@
                 font-size: 1rem;
             }
         }
+
+/* --- Formatted text CSS --- */
+
+/* A container for text that isn't as wide as the full screen (better readability) */
+.text-container {
+    max-width: 700px;
+    margin: 0 auto 3rem auto; /* Center with space at bottom */
+    padding: 0 1rem;
+}
+
+/* Larger introductory text */
+.lead-text {
+    font-size: 1.25rem; /* Slightly larger than normal */
+    font-weight: 300;   /* Light weight */
+    line-height: 1.6;
+    text-align: center;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+}
+
+/* Standard paragraph text */
+.process-text {
+    font-size: 1rem;
+    line-height: 1.8; /* More breathing room for lines */
+    color: var(--text-secondary);
+    text-align: left; /* Easier to read for longer blocks */
+    margin-bottom: 1.5rem;
+}
+
+/* Optional: A subtle divider line */
+.text-divider {
+    width: 50px;
+    height: 1px;
+    background: var(--accent);
+    margin: 2rem auto;
+    opacity: 0.3;
+}
+
     </style>
 </head>
 <body>
@@ -777,12 +818,12 @@
         <h2>Selected Works</h2>
         
         <div class="gallery-controls">
-            <button class="grid-toggle active" onclick="setGridLayout(2)">2 Columns</button>
-            <button class="grid-toggle" onclick="setGridLayout(3)">3 Columns</button>
+            <button class="grid-toggle" onclick="setGridLayout(2)">2 Columns</button>
+            <button class="grid-toggle active" onclick="setGridLayout(3)">3 Columns</button>
             <button class="grid-toggle" onclick="setGridLayout(4)">4 Columns</button>
         </div>
         
-        <div class="gallery-grid grid-2" id="galleryGrid">
+        <div class="gallery-grid grid-3" id="galleryGrid">
             <div class="gallery-item">
                 <img src="assets\images\gallery-1.jpg" alt="Sculpture 1">
                 <div class="gallery-item-info">
@@ -852,7 +893,28 @@
     <!-- Media Embeds Section -->
 <section id="media">
     <h2>Media & Process</h2>
-    
+
+ 
+    <!-- NEW TEXT BLOCK START -->
+    <div class="text-container">
+        <!-- Lead/Intro Text -->
+        <p class="lead-text" data-i18n="media.lead">
+            Exploring the boundary between precision and organic chaos.
+        </p>
+        
+        <div class="text-divider"></div>
+
+        <!-- Detailed Process Text -->
+        <p class="process-text" data-i18n="media.desc1">
+            My creative process begins with raw material studies. Whether working with bronze, clay, or painting and print, I start by interrogating the medium's resistance.
+        </p>
+        
+        <p class="process-text" data-i18n="media.desc2">
+            The documentation below offers a glimpse into the studio—from the initial sketches to the final installation.
+        </p>
+    </div>
+    <!-- NEW TEXT BLOCK END -->    
+
     <div class="media-embed">
         <!-- YouTube Video Embed -->
             <div class="video-container">

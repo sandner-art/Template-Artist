@@ -1,0 +1,9 @@
+<!-- assets/images/logo.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Minimalist Rounded Square -->
+    <rect x="5" y="5" width="90" height="90" rx="25" />
+    <!-- Abstract 'A' Shape -->
+    <path d="M50 25 L25 75" />
+    <path d="M50 25 L75 75" />
+    <path d="M35 55 L65 55" />
+</svg>
