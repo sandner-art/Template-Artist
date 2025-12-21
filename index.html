@@ -146,9 +146,19 @@
         /* Hero Slideshow */
         .hero {
             margin-top: 60px;
-            height: 90vh;
+            
+            /* 1. CONTROL HEIGHT HERE */
+            height: 70vh; /* Options: 600px, 100vh (full screen), 50vh (half) */
+            
+            /* 2. CONTROL WIDTH HERE */
+            max-width: 1600px; /* Limits width on huge screens. Set to 100% for full width */
+            margin-left: auto; /* Centers the block if max-width is used */
+            margin-right: auto;
+            
             position: relative;
             overflow: hidden;
+            /* Optional: Rounded corners if you want the hero 'contained' */
+            /* border-radius: 8px; */
         }
         
         .hero-slideshow {
@@ -305,7 +315,19 @@
         .gallery-grid.grid-3 {
             grid-template-columns: repeat(3, 1fr);
         }
-        
+
+        /* --- ADD THESE NEW RULES FOR 4-COLUMN GALLERY --- */
+        .gallery-grid.grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+/* Ensure 4 columns drop to 2 on tablets/smaller laptops */
+@media (max-width: 1100px) {
+    .gallery-grid.grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
         .gallery-item {
             position: relative;
             overflow: hidden;
@@ -402,25 +424,28 @@
             border-bottom: 1px solid var(--border);
         }
         
-        .social-platform-icon {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            font-size: 1.2rem;
-        }
-        
-        .instagram-icon {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            color: white;
-        }
-        
-        .twitter-icon {
-            background: #1DA1F2;
-            color: white;
-        }
+/* Update these styles for the Embed Icons */
+.social-platform-icon {
+    width: 28px; /* Smaller and cleaner */
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none !important; /* Removes the colored squares */
+    border-radius: 0;
+    color: var(--text-primary); /* Makes icon match your text color */
+}
+
+.social-platform-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+/* Remove specific background colors since we want minimal style */
+.instagram-icon, .twitter-icon {
+    background: none; 
+}
         
         .social-embed-content img {
             width: 100%;
@@ -541,31 +566,42 @@
             text-align: center;
         }
         
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-        
-        .social-links a {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.8rem 1.5rem;
-            border: 1px solid var(--border);
-            border-radius: 25px;
-            color: var(--text-primary);
-            text-decoration: none;
-            transition: all 0.2s;
-            font-size: 0.9rem;
-        }
-        
-        .social-links a:hover {
-            background: var(--bg-secondary);
-            transform: translateY(-2px);
-        }
+/* Replace your existing .social-links styles with this */
+.social-links {
+    display: flex;
+    gap: 2rem; /* Space between icons */
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none; /* Removes the border/pill shape */
+    background: none;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+/* Specific styling for the SVG icon inside the link */
+.social-links a svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor; /* Makes icon take the text color */
+}
+
+/* Hover effects */
+.social-links a:hover {
+    background: none;
+    transform: translateY(-3px) scale(1.1);
+    color: var(--text-secondary); /* Changes color slightly on hover */
+    opacity: 0.7;
+}
         
         .contact-email {
             display: inline-block;
@@ -743,6 +779,7 @@
         <div class="gallery-controls">
             <button class="grid-toggle active" onclick="setGridLayout(2)">2 Columns</button>
             <button class="grid-toggle" onclick="setGridLayout(3)">3 Columns</button>
+            <button class="grid-toggle" onclick="setGridLayout(4)">4 Columns</button>
         </div>
         
         <div class="gallery-grid grid-2" id="galleryGrid">
@@ -813,70 +850,89 @@
     </section>
 
     <!-- Media Embeds Section -->
-    <section id="media">
-        <h2>Media & Process</h2>
-        
-        <div class="media-embed">
-            <!-- YouTube Video Embed -->
+<section id="media">
+    <h2>Media & Process</h2>
+    
+    <div class="media-embed">
+        <!-- YouTube Video Embed -->
             <div class="video-container">
                 <iframe 
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                    title="Studio Visit - Artist Process" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    width="560" 
+                    height="315" 
+                    src="https://www.youtube-nocookie.com/embed/_--aw1YvYj4?si=4DGttI9DpeoYnbfA" 
+                    title="Studio Visit" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
                     allowfullscreen>
                 </iframe>
             </div>
-            <p class="video-caption">Studio Visit: Behind the Scenes of "Form & Space" Series</p>
-        </div>
-        
-        <!-- Instagram Embed Style -->
-        <div class="social-embed">
-            <div class="social-embed-header">
-                <div class="social-platform-icon instagram-icon">📷</div>
-                <div>
-                    <strong>@artistname</strong>
-                    <div style="font-size: 0.85rem; color: var(--text-secondary);">Instagram</div>
-                </div>
+        <p class="video-caption">Studio Visit: Behind the Scenes of "Form & Space" Series</p>
+    </div>
+    
+    <!-- Instagram Embed Style (Minimal) -->
+    <div class="social-embed">
+        <div class="social-embed-header">
+            <!-- Minimal SVG Icon -->
+            <div class="social-platform-icon instagram-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
             </div>
-            <div class="social-embed-content">
-                <img src="assets\images\gallery-17.jpg" alt="Instagram Post">
-                <p class="social-embed-text">
-                    Excited to share this new piece from the studio! Working with bronze and exploring negative space. What do you think? ✨
-                </p>
-                <a href="https://instagram.com/p/example" class="social-embed-link" target="_blank">View on Instagram →</a>
+            <div>
+                <strong>@artistname</strong>
+                <div style="font-size: 0.85rem; color: var(--text-secondary);">Instagram</div>
             </div>
         </div>
-        
-        <!-- Twitter/X Embed Style -->
-        <div class="social-embed">
-            <div class="social-embed-header">
-                <div class="social-platform-icon twitter-icon">𝕏</div>
-                <div>
-                    <strong>@artistname</strong>
-                    <div style="font-size: 0.85rem; color: var(--text-secondary);">Twitter/X</div>
-                </div>
+        <div class="social-embed-content">
+            <!-- Updated Image Path -->
+            <img src="assets/images/gallery-17.jpg" alt="Instagram Post">
+            <p class="social-embed-text">
+                Excited to share this new piece from the studio! Working with bronze and exploring negative space. What do you think? 
+            </p>
+            <a href="https://instagram.com/p/example" class="social-embed-link" target="_blank">View on Instagram →</a>
+        </div>
+    </div>
+    
+    <!-- Twitter/X Embed Style (Minimal) -->
+    <div class="social-embed">
+        <div class="social-embed-header">
+            <!-- Minimal SVG Icon -->
+            <div class="social-platform-icon twitter-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
             </div>
-            <div class="social-embed-content">
-                <p class="social-embed-text">
-                    Thrilled to announce my upcoming solo exhibition at Modern Art Gallery opening March 15th! Preview night March 14th. Save the date 🎨
-                </p>
-                <a href="https://twitter.com/artistname/status/example" class="social-embed-link" target="_blank">View on Twitter →</a>
+            <div>
+                <strong>@artistname</strong>
+                <div style="font-size: 0.85rem; color: var(--text-secondary);">Twitter/X</div>
             </div>
         </div>
-        
-        <!-- Another Video -->
-        <div class="media-embed">
+        <div class="social-embed-content">
+            <p class="social-embed-text">
+                Thrilled to announce my upcoming solo exhibition at Modern Art Gallery opening March 15th! Preview night March 14th. Save the date 
+            </p>
+            <a href="https://twitter.com/artistname/status/example" class="social-embed-link" target="_blank">View on Twitter →</a>
+        </div>
+    </div>
+    
+    <!-- Another Video -->
+    <div class="media-embed">
             <div class="video-container">
                 <iframe 
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                    title="Exhibition Walkthrough" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    width="560" 
+                    height="315" 
+                    src="https://www.youtube.com/embed/_--aw1YvYj4?si=4DGttI9DpeoYnbfA" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
                     allowfullscreen>
                 </iframe>
             </div>
-            <p class="video-caption">Exhibition Walkthrough: "Transitions" at Modern Art Space, 2024</p>
-        </div>
-    </section>
+        <p class="video-caption">Exhibition Walkthrough: "Transitions" at Modern Art Space, 2024</p>
+    </div>
+</section>
 
     <!-- About Section -->
     <section id="about">
@@ -985,12 +1041,35 @@
             
             <a href="mailto:artist@email.com" class="contact-email">artist@email.com</a>
             
-            <div class="social-links">
-                <a href="https://instagram.com/artistname" target="_blank">📷 Instagram</a>
-                <a href="https://twitter.com/artistname" target="_blank">𝕏 Twitter</a>
-                <a href="https://linkedin.com/in/artistname" target="_blank">💼 LinkedIn</a>
-                <a href="https://youtube.com/@artistname" target="_blank">▶️ YouTube</a>
-            </div>
+<div class="social-links">
+    <!-- Instagram -->
+    <a href="https://instagram.com/artistname" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+    </a>
+
+    <!-- Twitter / X -->
+    <a href="https://twitter.com/artistname" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+        <svg viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+    </a>
+
+    <!-- LinkedIn -->
+    <a href="https://linkedin.com/in/artistname" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+        </svg>
+    </a>
+
+    <!-- YouTube -->
+    <a href="https://youtube.com/@artistname" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg viewBox="0 0 24 24">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+    </a>
+</div>
         </div>
     </section>
 
